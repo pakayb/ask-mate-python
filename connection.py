@@ -10,17 +10,14 @@ def append_item_to_csv(filepath, header, value):
 def read_csv(filepath, header):
     with open(filepath, "r") as data_file:
         csv_reader = csv.DictReader(data_file, fieldnames=header)
+        next(csv_reader)
+        data = {}
         for row in csv_reader:
-            print(row)
+            data[row['id']]=[row[headers] for headers in header]
 
-        #readed = {row[0][0][1]: row.get() for row in csv_reader}
-        # :
-        #     stories[row['id']] = [
-        #         row['id'], row['title'], row['user_story'], row['acceptance_criteria'], row['business_value'],
-        #         row['estimation'], row['status']
-        print(readed)
+        return data
 
 
-read_csv('sample_data/answer.csv', ['id', 'submission_time', 'vote_number', 'question_id', 'message'])
+print(read_csv('sample_data/answer.csv', ['id', 'submission_time', 'vote_number', 'question_id', 'message']))
 
 
