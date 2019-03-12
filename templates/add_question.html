@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add question</title>
+</head>
+<body>
+    <form action="/question/<question_id>" method="post">
+        <p><label for="add-question">Question title:<br></label>
+            <input type="text" name="title"></p>
+        <p><label for="add-question">Question message:<br></label>
+            <textarea id="add-question" name="message" rows="5" cols="20"></textarea></p>
+        <p><button type="submit">Add question</button></p>
+    </form>
+</body>
+</html>
