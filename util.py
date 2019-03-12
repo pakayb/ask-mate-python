@@ -1,8 +1,9 @@
 import time,datetime,data_manager
 from operator import itemgetter
 
+
 def create_timestamp():
-    return int(time.time())
+    return str(int(time.time()))
 
 
 def convert_timestamp(timestamp):
@@ -10,10 +11,10 @@ def convert_timestamp(timestamp):
 
 
 def question_next_id():
-    questions = data_manager.get_all_question()
+    questions = data_manager.get_all_questions()
     try:
-        next_id = max(int(questions.keys()))
-        return next_id+1
+        next_id = max(questions.keys())
+        return int(next_id)+1
     except ValueError:
         return 1
 
