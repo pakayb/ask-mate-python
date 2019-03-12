@@ -1,5 +1,5 @@
-import time,datetime
-
+import time,datetime,data_manager
+from operator import itemgetter
 
 def create_timestamp():
     return int(time.time())
@@ -9,10 +9,18 @@ def convert_timestamp(timestamp):
     return datetime.datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
 
 
-def question_maximum_id():
-    questions = data.manager.get_all_question()
+def question_next_id():
+    questions = data_manager.get_all_question()
     try:
-        maximum_id = max(int(questions.keys()))
-        return maximum_id
+        next_id = max(int(questions.keys()))
+        return next_id+1
     except ValueError:
-        return 0
+        return 1
+
+
+def sorting_by_time():
+    questions = data_manager.get_all_questions()
+    questions = [question for question in questions.values()]
+    questions = sorted(questions,key=itemgetter(1))
+    sorted_questions = {questions[i][0]:line for i,line in enumerate(questions)}
+    return sorted_questions

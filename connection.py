@@ -18,6 +18,4 @@ def read_csv(filepath, header):
         return data
 
 
-print(read_csv('sample_data/answer.csv', ['id', 'submission_time', 'vote_number', 'question_id', 'message']))
-
 
