@@ -5,9 +5,18 @@
     <title>Ask-Mate</title>
 </head>
 <body>
-    {% for question in questions %}
-        {{ questions[question][5] }}<br>
-    {% endfor %}
-    <p><a href="/add-question">Add question</a></p>
-</body>
+    <h1>AskMate v1.0</h1>
+    <table>
+        <tr>
+            <th>List of all questions</th>
+        </tr>
+        <tr>
+        <td>{% for question in questions %}
+            <p><a href="/question/{{question}}">{{ questions[question][4]}}<a></a></p>
+            {% endfor %}</td>
+        </tr>
+    </table>
+    <p><a href="/add-question"><button type="button">Add new question</button></a></p>
+    </body>
 </html>
+
