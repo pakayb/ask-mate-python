@@ -43,9 +43,8 @@ def add_answer(question_id):
         new_answer_data = {
             "id": util.answer_next_id(),
             "submission_time": util.create_timestamp(),
-            "view_number": "0",
             "vote_number": "0",
-            "title": request.form.get('title'),
+            "question_id":question_id,
             "message": request.form.get('message'),
             "image": "n/a"
         }
