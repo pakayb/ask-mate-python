@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question details</title>
+</head>
+<body>
+<table style="width: 100%" align="center">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Time</th>
+        <th>View</th>
+        <th>Vote number</th>
+        <th>Message</th>
+        <th>Image</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+            {% for item in question %}
+                <td>{{ item }}</td>
+            {% endfor %}
+    </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>
