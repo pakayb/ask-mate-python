@@ -5,21 +5,22 @@
     <title>Question details</title>
 </head>
 <body>
-<table>
+<table style="table-layout: auto;
+  width: 100%">
     <thead >
-    <th>
+    <tr>
         {% for header in question_headers %}
-            <td>{{ header }}</td>
+            <th>{{ header }}</th>
         {% endfor %}
-    </th>
+    </tr>
     </thead>
     <tbody>
     <tr>
         {% for question in question %}
         {% if loop.index==2 %}
-            <td>{{readable_time}}</td>
+            <td style="text-align:center">{{readable_time}}</td>
         {% else %}
-            <td>{{ question }}</td>
+            <td style="text-align:center">{{ question }}</td>
         {% endif %}
         {% endfor %}
 
