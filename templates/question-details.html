@@ -8,21 +8,19 @@
 <table style="width: 100%" align="center">
     <thead>
     <tr>
-        <th>Id</th>
-        <th>Title</th>
-        <th>Time</th>
-        <th>View</th>
-        <th>Vote number</th>
-        <th>Message</th>
-        <th>Image</th>
+        {% for header in headers %}
+            <td>{{ header }}</td>
+        {% endfor %}
     </tr>
     </thead>
     <tbody>
     <tr>
-            {% for item in question %}
-                <td>{{ item }}</td>
-            {% endfor %}
+        {% for question in question %}
+            <td>{{ question }}</td>
+        {% endfor %}
+
     </tr>
+    <p><a href="/question/{{ question_id }}/new-answer"><button type="button">Add new answer</button></a></p>
     </tbody>
 
 </table>
