@@ -23,8 +23,10 @@ def get_all_answers():
 
 
 def get_question_headers():
-    return QUESTION_HEADER
+    question_header = [header.title().replace("_", " ") for header in QUESTION_HEADER]
+    return question_header
 
 
 def get_answer_headers():
-    return ANSWER_HEADER
+    answer_header = [header.title().replace("_", " ") for header in ANSWER_HEADER]
+    return answer_header

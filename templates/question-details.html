@@ -5,13 +5,13 @@
     <title>Question details</title>
 </head>
 <body>
-<table style="width: 100%" align="center">
-    <thead>
-    <tr>
-        {% for header in headers %}
+<table style="text-align:center;width:100%" >
+    <thead >
+    <th>
+        {% for header in question_headers %}
             <td>{{ header }}</td>
         {% endfor %}
-    </tr>
+    </th>
     </thead>
     <tbody>
     <tr>
@@ -20,10 +20,18 @@
         {% endfor %}
 
     </tr>
-    <p><a href="/question/{{ question_id }}/new-answer"><button type="button">Add new answer</button></a></p>
     </tbody>
 
 </table>
+    <p><a href="/question/{{ question_id }}/new-answer"><button type="button">Add new answer</button></a></p>
 
+<table style="width: 100%">
+    <thead>
+    {% for answer_header in answer_headers %}
+        {{ answer_header }}
+    {% endfor %}
+    </thead>
+{#    to be continued with answers...#}
+</table>
 </body>
 </html>
