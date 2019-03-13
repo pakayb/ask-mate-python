@@ -30,7 +30,9 @@
         </tr>
         <tr>
         <td>{% for answer in answers %}
-            <p>{{ answers[answer][4]}}</p>
+            {% if question_id == answers[answer][3] %}
+                <p>{{ answers[answer][4]}}</p>
+            {% endif %}
             {% endfor %}</td>
         </tr>
     </table>
