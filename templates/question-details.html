@@ -5,7 +5,7 @@
     <title>Question details</title>
 </head>
 <body>
-<table style="text-align:center;width:100%" >
+<table>
     <thead >
     <th>
         {% for header in question_headers %}
@@ -16,7 +16,11 @@
     <tbody>
     <tr>
         {% for question in question %}
+        {% if loop.index==2 %}
+            <td>{{readable_time}}</td>
+        {% else %}
             <td>{{ question }}</td>
+        {% endif %}
         {% endfor %}
 
     </tr>
