@@ -37,9 +37,23 @@ def question_details(question_id):
     return render_template('question-details.html', question=question, headers=data_manager.get_question_headers())
 
 
-@app.route('/question/<question_id>/new-answer')
+@app.route('/question/<question_id>/new-answer', methods=['GET', 'POST'])
 def add_answer(question_id):
-    render_template('add_answer.html', answer_id=question_id)
+    if request.method == 'POST':
+        new_answer_data = {
+            "id": util.answer_next_id(),
+            "submission_time": util.create_timestamp(),
+            "view_number": "0",
+            "vote_number": "0",
+            "title": request.form.get('title'),
+            "message": request.form.get('message'),
+            "image": "n/a"
+        }
+        data_manager.save_new_answer(new_answer_data)
+        route = f"/question/{question_id}"
+        redirect(route)
+    elif request.method == 'GET':
+        return render_template('add_answer.html',question_id=question_id)
 
 
 if __name__ == '__main__':

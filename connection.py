@@ -10,7 +10,7 @@ def append_item_to_csv(filepath, header, value):
 def read_csv(filepath, header):
     with open(filepath, "r") as data_file:
         csv_reader = csv.DictReader(data_file, fieldnames=header)
-        next(csv_reader)
+        # next(csv_reader)
         data = {}
         for row in csv_reader:
             data[row['id']]=[row[headers] for headers in header]
