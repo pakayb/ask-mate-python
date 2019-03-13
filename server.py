@@ -49,8 +49,8 @@ def add_answer(question_id):
             "image": "n/a"
         }
         data_manager.save_new_answer(new_answer_data)
-        route = f"/question/{question_id}"
-        redirect(route)
+        route = f"/question/{str(question_id)}"
+        return redirect(route)
     elif request.method == 'GET':
         return render_template('add_answer.html',question_id=question_id)
 
