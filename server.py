@@ -25,7 +25,8 @@ def save_new_question():
             "image": "n/a"
         }
         data_manager.save_new_question(new_question_data)
-        return redirect("/list")
+        route = f"question/{new_question_data['id']}"
+        return redirect(route)
     return render_template('add_question.html')
 
 
