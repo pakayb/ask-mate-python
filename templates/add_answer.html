@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add answer</title>
+</head>
+<body>
+<form action="/question/{{ question_id }}/new-answer" method="post">
+    <p>
+        <label>New answer:</label><br>
+        <textarea name="message" rows="8" cols="80"></textarea><br>
+    <button type="submit">Save answer</button>
+    </p>
+</form>
+
+</body>
+</html>
