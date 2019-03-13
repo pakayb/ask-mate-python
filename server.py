@@ -34,7 +34,7 @@ def save_new_question():
 def question_details(question_id):
     questions = data_manager.get_all_questions()
     question = questions[question_id]
-    return render_template('question-details.html', question=question, question_headers=data_manager.get_question_headers(), question_id=question_id,answer_headers=data_manager.get_answer_headers(), answers=data_manager.get_all_answers())
+    return render_template('question-details.html', question=question, question_headers=data_manager.get_question_headers(), question_id=question_id,answer_headers=data_manager.get_answer_headers(), answers=util.sorting_answers_by_time())
 
 
 @app.route('/question/<question_id>/new-answer', methods=['GET', 'POST'])

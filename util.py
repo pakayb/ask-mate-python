@@ -27,6 +27,14 @@ def sorting_by_time():
     return sorted_questions
 
 
+def sorting_answers_by_time():
+    answers = data_manager.get_all_answers()
+    answers = [answer for answer in answers.values()]
+    answers = sorted(answers,key=itemgetter(1), reverse=True)
+    sorted_answers = {answers[i][0]: line for i, line in enumerate(answers)}
+    return sorted_answers
+
+
 def answer_next_id():
     answers = data_manager.get_all_answers()
     try:
