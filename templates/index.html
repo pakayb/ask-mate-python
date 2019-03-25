@@ -12,7 +12,7 @@
         </tr>
         <tr>
         <td>{% for question in questions %}
-            <p><a href="/question/{{question}}">{{ questions[question][4]}}<a></a></p>
+            <p><a href="/question/{{question}}">{{ question.title }}<a></a></p>
             {% endfor %}</td>
         </tr>
     </table>
