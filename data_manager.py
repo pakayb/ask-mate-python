@@ -17,13 +17,14 @@ def get_all_questions(cursor,limit=None):
     questions = cursor.fetchall()
     return questions
 
+
 @database_common.connection_handler
 def save_new_question(cursor,data):
     cursor.execute("""
                     INSERT INTO question (submission_time, view_number, vote_number, title, message)  
                     VALUES (%s, %s, %s, %s, %s)
-    """,
-                   (data.get('submission_time'), data.get('view_number'), data.get('vote_number'), data.get('title'), data.get('message')))
+    """, (data.get('submission_time'), data.get('view_number'), data.get('vote_number'), data.get('title'), data.get('message')))
+
 
 @database_common.connection_handler
 def get_max_id(cursor):
@@ -36,16 +37,27 @@ def get_max_id(cursor):
     return max_id.get('id')
 
 
-def save_new_answer(value):
-    connection.append_item_to_csv(ANSWER_FILE_PATH, ANSWER_HEADER, value)
+@database_common.connection_handler
+def save_new_answer(cursor, data):
+    # connection.append_item_to_csv(ANSWER_FILE_PATH, ANSWER_HEADER, value)
+    cursor.execute("""
+                    INSERT INTO answer (submission_time, vote_number, question_id, message)  
+                    VALUES (%s, %s, %s, %s)
+    """, (data.get('submission_time'), data.get('vote_number'), data.get('question_id'), data.get('message')))
 
 
 # get_all_questions():
    # return connection.read_csv(QUESTION_FILE_PATH, QUESTION_HEADER)
 
 
-def get_all_answers():
-    return connection.read_csv(ANSWER_FILE_PATH, ANSWER_HEADER)
+@database_common.connection_handler
+def get_all_answers(cursor):
+    # return connection.read_csv(ANSWER_FILE_PATH, ANSWER_HEADER)
+    cursor.execute("""
+                        SELECT * FROM answer
+                        ORDER BY submission_time DESC
+                        """)
+    return cursor.fetchall()
 
 # @database_common.connection_handler
 # def get_question_headers(cursor):

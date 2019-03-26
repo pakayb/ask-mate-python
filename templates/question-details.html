@@ -35,9 +35,7 @@
         </tr>
         <tr>
         <td>{% for answer in answers %}
-            {% if question_id == answers[answer][3] %}
-                <p>{{ answers[answer][4]}}</p>
-            {% endif %}
+            <p><a href="/question/{{answer.id}}">{{ answer.message }}<a></a></p>
             {% endfor %}</td>
         </tr>
     </table>

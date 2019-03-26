@@ -43,7 +43,7 @@ def question_details(question_id):
     return render_template(
         'question-details.html', question=question_details,
         question_id=question_id,
-        answers=util.sorting_answers_by_time()
+        answers=data_manager.get_all_answers()
     )
 
 
@@ -51,7 +51,6 @@ def question_details(question_id):
 def add_answer(question_id):
     if request.method == 'POST':
         new_answer_data = {
-            "id": util.answer_next_id(),
             "submission_time": util.create_timestamp(),
             "vote_number": "0",
             "question_id":question_id,
