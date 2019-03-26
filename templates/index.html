@@ -12,10 +12,11 @@
         </tr>
         <tr>
         <td>{% for question in questions %}
-            <p><a href="/question/{{question}}">{{ question.title }}<a></a></p>
+            <p><a href="/question/{{question.id}}">{{ question.title }}<a></a></p>
             {% endfor %}</td>
         </tr>
     </table>
+    <p><a href="{{ url_for('all_questions') }}"><button type="button">Show all questions</button></a> </p>
     <p><a href="/add-question"><button type="button">Add new question</button></a></p>
     </body>
 </html>

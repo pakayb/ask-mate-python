@@ -4,42 +4,46 @@ import data_manager, util
 app = Flask(__name__)
 
 
-@app.route('/')
 @app.route('/list')
-def all_questions():
-    #questions = util.sorting_by_time()
-    questions = data_manager.get_all_questions()
-    print(questions)
+def all_questions(limit=None):
+    questions = data_manager.get_all_questions(limit)
     return render_template('index.html', questions=questions)
 
+@app.route('/')
+def latest_questions(limit=5):
+    questions = data_manager.get_all_questions(limit)
+    return render_template('index.html', questions=questions)
 
 @app.route('/add-question', methods=['GET', 'POST'])
 def save_new_question():
     if request.method == 'POST':
         new_question_data = {
-            "id": util.question_next_id(),
             "submission_time": util.create_timestamp(),
             "view_number": "0",
             "vote_number": "0",
             "title": request.form.get('title'),
             "message": request.form.get('message'),
-            "image": "n/a"
         }
         data_manager.save_new_question(new_question_data)
-        route = f"question/{new_question_data['id']}"
-        return redirect(route)
+        # id = data_manager.get_max_id()
+        # route = f"question/{new_question_data['id']}"
+        return redirect(url_for('question_details',question_id=data_manager.get_max_id()))
     return render_template('add_question.html')
 
 
 @app.route('/question/<question_id>')
 def question_details(question_id):
     questions = data_manager.get_all_questions()
-    question = questions[question_id]
-    readable_time = util.convert_timestamp(int(question[1]))
+    for question in questions:
+        print(question.get('id'))
+        if int(question_id) == question.get('id'):
+            question_details = question.values()
+            print(question_details)
+    # readable_time = util.convert_timestamp(int(question[1]))
     return render_template(
-        'question-details.html', question=question, question_headers=data_manager.get_question_headers(),
-        question_id=question_id, answer_headers=data_manager.get_answer_headers(),
-        answers=util.sorting_answers_by_time(), readable_time=readable_time
+        'question-details.html', question=question_details,
+        question_id=question_id,
+        answers=util.sorting_answers_by_time()
     )
 
 

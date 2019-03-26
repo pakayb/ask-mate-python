@@ -3,7 +3,7 @@ from operator import itemgetter
 
 
 def create_timestamp():
-    return str(int(time.time()))
+    return datetime.datetime.now()
 
 
 def convert_timestamp(timestamp):
