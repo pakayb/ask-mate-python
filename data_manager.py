@@ -46,8 +46,11 @@ def save_new_answer(cursor, data):
     """, (data.get('submission_time'), data.get('vote_number'), data.get('question_id'), data.get('message')))
 
 
-# get_all_questions():
-   # return connection.read_csv(QUESTION_FILE_PATH, QUESTION_HEADER)
+@database_common.connection_handler
+def update_view_number(cursor,number):
+    cursor.execute("""
+                    UPDATE question SET view_number = %(views)s
+    """,{'views':number})
 
 
 @database_common.connection_handler

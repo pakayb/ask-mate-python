@@ -35,6 +35,8 @@ def question_details(question_id):
     for question in questions:
         if int(question_id) == question.get('id'):
             question_details = question.values()
+            view_number = question.get('view_number') + 1
+    data_manager.update_view_number(view_number)
     return render_template(
         'question-details.html', question=question_details,
         question_id=question_id,
