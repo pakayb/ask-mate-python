@@ -25,9 +25,7 @@ def save_new_question():
             "message": request.form.get('message'),
         }
         data_manager.save_new_question(new_question_data)
-        # id = data_manager.get_max_id()
-        # route = f"question/{new_question_data['id']}"
-        return redirect(url_for('question_details',question_id=data_manager.get_max_id()))
+        return redirect(url_for('question_details',question_id=data_manager.get_max_id()),question_headers=data_manager.QUESTION_HEADER)
     return render_template('add_question.html')
 
 
@@ -35,11 +33,8 @@ def save_new_question():
 def question_details(question_id):
     questions = data_manager.get_all_questions()
     for question in questions:
-        print(question.get('id'))
         if int(question_id) == question.get('id'):
             question_details = question.values()
-            print(question_details)
-    # readable_time = util.convert_timestamp(int(question[1]))
     return render_template(
         'question-details.html', question=question_details,
         question_id=question_id,
