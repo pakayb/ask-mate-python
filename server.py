@@ -25,7 +25,7 @@ def save_new_question():
             "message": request.form.get('message'),
         }
         data_manager.save_new_question(new_question_data)
-        return redirect(url_for('question_details',question_id=data_manager.get_max_id()),question_headers=data_manager.QUESTION_HEADER)
+        return redirect(url_for('question_details',question_id=data_manager.get_max_id()))
     return render_template('add_question.html')
 
 
