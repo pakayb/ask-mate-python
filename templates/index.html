@@ -7,15 +7,15 @@
 </head>
 <body>
 <div id="searchbar">
-        <input type="text" placeholder="Search..">
-            <form action="/search" method="post">
-        <p><button type="submit">Let's search!</button></p>
+    <form action="/search" method="get">
+    <input type="text" placeholder="Search.." name="search_key">
+    <input type="submit" value="Let's search!">
     </form>
 </div>
       <h1>Ask Mate 2.0</h1>
     <table id="kacsa">
         <tr>
-            <th>List of all questions</th>
+            <th>{{header}}</th>
         </tr>
         <tr>
         <td>{% for question in questions %}

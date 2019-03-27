@@ -62,6 +62,18 @@ def get_all_answers(cursor):
                         """)
     return cursor.fetchall()
 
+
+@database_common.connection_handler
+def get_searched_questions(cursor, keyword):
+    cursor.execute("""
+                        SELECT DISTINCT question.* FROM answer
+                        JOIN question ON answer.question_id = question.id
+                        WHERE answer.message ILIKE %(keyword)s OR question.title ILIKE %(keyword)s OR question.message ILIKE %(keyword)s
+                """,
+                   {'keyword':keyword})
+    return cursor.fetchall()
+
+
 # @database_common.connection_handler
 # def get_question_headers(cursor):
 #     cursor.execute("""

@@ -7,12 +7,14 @@ app = Flask(__name__)
 @app.route('/list')
 def all_questions(limit=None):
     questions = data_manager.get_all_questions(limit)
-    return render_template('index.html', questions=questions)
+    return render_template('index.html', questions=questions, header='List of all questions')
+
 
 @app.route('/')
 def latest_questions(limit=5):
     questions = data_manager.get_all_questions(limit)
-    return render_template('index.html', questions=questions)
+    return render_template('index.html', questions=questions, header='Latest questions')
+
 
 @app.route('/add-question', methods=['GET', 'POST'])
 def save_new_question():
@@ -59,6 +61,13 @@ def add_answer(question_id):
         return redirect(route)
     elif request.method == 'GET':
         return render_template('add_answer.html',question_id=question_id)
+
+
+@app.route('/search')
+def searching():
+    search_key = '%'+request.args.get('search_key')+'%'
+    questions = data_manager.get_searched_questions(search_key)
+    return render_template('index.html', questions=questions, header='Search result')
 
 
 if __name__ == '__main__':
