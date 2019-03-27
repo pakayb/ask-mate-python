@@ -44,7 +44,7 @@
                 {{ answer.submission_time }}
             </td>
             <td>
-                <a href="/question/{{answer.id}}">{{ answer.message }}<a></a>
+                {{ answer.message }}<a href="/answer/{{ answer.id }}/edit"> <button type="button">Edit answer</button></a>
             </td>
         </tr>
         {% endif %}

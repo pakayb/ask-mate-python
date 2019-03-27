@@ -75,11 +75,12 @@ def get_searched_questions(cursor, keyword):
 
 
 @database_common.connection_handler
-def update_answer(cursor,answer):
+def update_answer(cursor, answer, answer_id):
     cursor.execute("""
-                    UPDATE question SET message = %(answer)s 
+                    UPDATE answer SET message = %(answer)s
+                    WHERE id = %(answer_id)s
     """,
-                   {'answer':answer})
+                   {'answer': answer, 'answer_id': answer_id})
 
 # @database_common.connection_handler
 # def get_question_headers(cursor):

@@ -5,11 +5,15 @@
     <title>Add answer</title>
 </head>
 <body>
+{% if answer is defined %}
+<form action="/answer/{{ answer_id }}/edit" method="post">
+{% else %}
 <form action="/question/{{ question_id }}/new-answer" method="post">
+{% endif %}
     <p>
         <label>New answer:</label><br>
-        <textarea name="message" rows="8" cols="80" minlength="10" required></textarea><br>
-    <button type="submit">Save answer</button>
+        <textarea name="message" rows="8" cols="80" minlength="10" required>{{answer if answer is defined}}</textarea><br>
+    <button type="submit">{{'Save new answer' if answer is not defined else 'Update answer'}}</button>
     </p>
 </form>
 
