@@ -1,0 +1,35 @@
+body{
+    background-image:url("ask_bg_2.jpg");
+}
+
+h1{
+    color: cornsilk;
+    font-size: 3em;
+    font-style: italic;
+}
+
+#searchbar{
+    float: right;
+    padding: 0px;
+    border: none;
+    margin-top: 0px;
+    margin-right: 16px;
+    font-size: 17px;
+}
+
+#list{
+    text-decoration: none;
+    font-weight:bolder;
+    font-style: italic;
+    color: cornsilk;
+}
+
+#kacsa{
+    margin-top:150px;
+    margin-left: 30px;
+    color: cornsilk;
+}
+
+.butt{
+    margin-left: 30px;
+}
