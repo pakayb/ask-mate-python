@@ -65,15 +65,16 @@ def add_answer(question_id):
 
 @app.route('/answer/<answer_id>/edit', methods=['GET', 'POST'])
 def update_answer(answer_id):
+    answers = data_manager.get_all_answers()
+    for answer in answers:
+        if int(answer_id) == answer.get('id'):
+            answer_message = answer.get('message')
+            question_id = answer.get('question_id')
     if request.method == 'GET':
-        answers = data_manager.get_all_answers()
-        for answer in answers:
-            if int(answer_id) == answer.get('id'):
-                answer_message = answer.get('message')
         return render_template('add_answer.html', answer=answer_message, answer_id=answer_id)
     elif request.method == 'POST':
         data_manager.update_answer(request.form.get('message'), answer_id)
-        return redirect(url_for('question_details'))
+        return redirect(url_for('question_details', question_id=question_id))
 
 
 
