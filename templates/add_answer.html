@@ -1,21 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add answer</title>
-</head>
+{% extends "layout.html" %}
+{% block content %}
 <body>
+    <a href="/list"><h1 class="kacsa">Ask Mate 2.0</h1></a>
 {% if answer is defined %}
-<form action="/answer/{{ answer_id }}/edit" method="post">
+    <form action="/answer/{{ answer_id }}/edit" method="post">
 {% else %}
-<form action="/question/{{ question_id }}/new-answer" method="post">
+    <form action="/question/{{ question_id }}/new-answer" method="post">
 {% endif %}
-    <p>
-        <label>New answer:</label><br>
-        <textarea name="message" rows="8" cols="80" minlength="10" required>{{answer if answer is defined}}</textarea><br>
-    <button type="submit">{{'Save new answer' if answer is not defined else 'Update answer'}}</button>
-    </p>
-</form>
+        <p id="textlabel"><label>{{'New answer' if answer is not defined else 'Edit answer'}}</label><br>
+            <textarea name="message" rows="8" cols="60" minlength="10" required>{{answer if answer is defined}}</textarea></p>
+        <p><button type="submit">{{'Save new answer' if answer is not defined else 'Update answer'}}</button></p>
 
+    </form>
 </body>
-</html>
+{% endblock %}

@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="static/main.css">
-    <title>Ask-Mate</title>
-</head>
+{% extends "layout.html" %}
+{% block content %}
 <body>
-<div id="searchbar">
-    <form action="/search" method="get">
-    <input type="text" placeholder="Search.." name="search_key">
-    <input type="submit" value="Let's search!">
-    </form>
-</div>
-      <h1>Ask Mate 2.0</h1>
+    <div id="searchbar">
+        <form action="/search" method="get">
+            <input type="text" placeholder="Search.." name="search_key">
+            <input type="submit" value="Let's search!">
+        </form>
+    </div>
+    <h1 class="kacsa">Ask Mate 2.0</h1>
     <table id="kacsa">
         <tr>
             <th>{{header}}</th>
@@ -25,6 +20,7 @@
     </table>
     <p><a href="{{ url_for('all_questions') }}"><button type="button" class="butt">Show all questions</button></a> </p>
     <p><a href="/add-question"><button type="button" class="butt">Add new question</button></a></p>
-    </body>
-</html>
+</body>
+{% endblock %}
+
 

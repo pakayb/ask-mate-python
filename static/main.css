@@ -2,10 +2,20 @@ body{
     background-image:url("ask_bg_2.jpg");
 }
 
-h1{
+/*h1{
     color: cornsilk;
     font-size: 3em;
     font-style: italic;
+    text-decoration: none;
+}*/
+
+.kacsa{
+    color: cornsilk;
+    font-size: 3em;
+    font-style: italic;
+    margin-bottom: 90px;
+    text-decoration: none;
+
 }
 
 #searchbar{
@@ -32,4 +42,9 @@ h1{
 
 .butt{
     margin-left: 30px;
+}
+
+#textlabel{
+    color: cornsilk;
+    font-weight: bolder;
 }

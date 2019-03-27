@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Question details</title>
-</head>
+{% extends "layout.html" %}
+{% block content %}
 <body>
+<a href="/list"><h1 class="kacsa">Ask Mate 2.0</h1></a>
 <table style="table-layout: auto;
   width: 100%">
-    <thead >
+    <thead>
     <tr>
         <th>Id</th>
         <th>Submission time</th>
@@ -53,4 +50,4 @@
     </table>
 <p><a href="/list"><button type="button">Back to main page</button></a></p>
 </body>
-</html>
+{% endblock %}
