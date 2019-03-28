@@ -2,12 +2,12 @@ body{
     background-image:url("ask_bg_2.jpg");
 }
 
-/*h1{
+h1{
     color: cornsilk;
     font-size: 3em;
     font-style: italic;
     text-decoration: none;
-}*/
+}
 
 .kacsa{
     color: cornsilk;
@@ -47,4 +47,10 @@ body{
 #textlabel{
     color: cornsilk;
     font-weight: bolder;
+}
+
+#text{
+    text-align:center;
+    color: cornsilk;
+    text-align: left;
 }
