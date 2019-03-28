@@ -27,7 +27,7 @@ def save_new_question():
             "message": request.form.get('message'),
         }
         data_manager.save_new_question(new_question_data)
-        return redirect(url_for('question_details',question_id=data_manager.get_max_id()))
+        return redirect(url_for('question_details', question_id=data_manager.get_max_id()))
     return render_template('add_question.html')
 
 
@@ -42,7 +42,8 @@ def question_details(question_id):
     return render_template(
         'question-details.html', question=question_details,
         question_id=question_id,
-        answers=data_manager.get_all_answers()
+        answers=data_manager.get_all_answers(),
+        comments=data_manager.get_all_comments()
     )
 
 
@@ -52,7 +53,7 @@ def add_answer(question_id):
         new_answer_data = {
             "submission_time": util.create_timestamp(),
             "vote_number": "0",
-            "question_id":question_id,
+            "question_id": question_id,
             "message": request.form.get('message'),
             "image": "n/a"
         }
@@ -60,7 +61,7 @@ def add_answer(question_id):
         route = f"/question/{str(question_id)}"
         return redirect(route)
     elif request.method == 'GET':
-        return render_template('add_answer.html',question_id=question_id)
+        return render_template('add_answer.html', question_id=question_id)
 
 
 @app.route('/answer/<answer_id>/edit', methods=['GET', 'POST'])
@@ -79,14 +80,13 @@ def update_answer(answer_id):
 
 @app.route('/search')
 def searching():
-    search_key = '%'+request.args.get('search_key')+'%'
+    search_key = '%' + request.args.get('search_key') + '%'
     questions = data_manager.get_searched_questions(search_key)
     return render_template('index.html', questions=questions, header='Search result')
 
 
-@app.route('/question/<answer_id>/new-comment', methods=['GET', 'POST'])
-@app.route('/question/<question_id>/new-comment', methods=['GET', 'POST'])
-def add_comment(answer_id=None, question_id=None):
+@app.route('/answer/<answer_id>/new-comment', methods=['GET', 'POST'])
+def add_comment_to_answer(answer_id=None, question_id=None):
     if request.method == 'POST':
         new_comment_data = {
             "question_id": question_id,
@@ -96,9 +96,30 @@ def add_comment(answer_id=None, question_id=None):
             "edited_count": 0
         }
         data_manager.add_comment(new_comment_data)
-        return render_template('kacsa.html', comments=data_manager.get_all_comments())
+        redirect_id = request.form.get('redirect_id')
+        return redirect(url_for('question_details', question_id=redirect_id))
     elif request.method == 'GET':
-        return render_template('add_comment.html', question_id=question_id, header='ASD')
+        answers = data_manager.get_all_answers()
+        for answer in answers:
+            if int(answer_id) == answer.get('id'):
+                redirect_id = answer.get('question_id')
+        return render_template('add_answer_comment.html', answer_id=answer_id, redirect_id=redirect_id)
+
+
+@app.route('/question/<question_id>/new-comment', methods=['GET', 'POST'])
+def add_comment_to_question(answer_id=None, question_id=None):
+    if request.method == 'POST':
+        new_comment_data = {
+            "question_id": question_id,
+            "answer_id": answer_id,
+            "message": request.form.get('message'),
+            "submission_time": util.create_timestamp(),
+            "edited_count": 0
+        }
+        data_manager.add_comment(new_comment_data)
+        return redirect(url_for('question_details', question_id=question_id))
+    elif request.method == 'GET':
+        return render_template('add_comment.html', question_id=question_id)
 
 
 if __name__ == '__main__':

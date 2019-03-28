@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <body>
-<a href="/list"><h1 class="kacsa">Ask Mate 2.0</h1></a>
+<a href="/list"><p class="kacsa">Ask Mate 2.0</p></a>
 <table style="table-layout: auto;
   width: 100%">
     <thead>
@@ -26,8 +26,15 @@
     </tbody>
 
 </table>
-<p><a href="/question/{{ question_id }}/new-answer"><button type="button">Add new answer</button></a></p>
+<h3>Comments to question</h3>
+<a href="/question/{{ question_id }}/new-comment"><button type="button">Add comment</button></a>
+    {% for comment in comments %}
+    {% if comment.question_id == question_id|int %}
+    <p>{{ comment.submission_time }} {{ comment.message }}</p>
+    {% endif %}
+    {% endfor %}
 <h3>List of all answers</h3>
+<p><a href="/question/{{ question_id }}/new-answer"><button type="button">Add new answer</button></a></p>
 <table>
         <tr>
             <th>Submission Time</th>
@@ -41,9 +48,19 @@
                 {{ answer.submission_time }}
             </td>
             <td>
-                {{ answer.message }}<a href="/answer/{{ answer.id }}/edit"> <button type="button">Edit answer</button></a>
+                {{ answer.message }}
+                <a href="/answer/{{ answer.id }}/edit"> <button type="button">Edit answer</button></a>
+                <a href="/answer/{{ answer.id }}/new-comment"><button type="button">Add comment</button></a>
+                    {% for comment in comments %}
+                    {% if comment.answer_id == answer.id %}
+                    <p style="margin-left: 50px">{{ comment.submission_time }} {{ comment.message }}</p>
+                    {% endif %}
+                    {% endfor %}
             </td>
         </tr>
+                <tr>
+
+                </tr>
         {% endif %}
         {% endfor %}
         </tr>
