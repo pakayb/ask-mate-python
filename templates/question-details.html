@@ -1,65 +1,72 @@
 {% extends "layout.html" %}
 {% block content %}
 <body>
-<h1>Ask Mate 2.0</h1>
-<table style="table-layout: auto;
-  width: 100%">
-    <thead>
-    <tr id="textlabel">
-        <th>Id</th>
-        <th>Submission time</th>
-        <th>View number</th>
-        <th>Vote number</th>
-        <th>Title</th>
-        <th>Message</th>
-        <th>Image</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        {% for question in question %}
-
-            <td id=text>{{ question }}</td>
+    <h1>Ask Mate 2.0</h1>
+    <table style="table-layout: auto; width: 100%">
+        <thead>
+            <tr id="textlabel">
+                <th>Id</th>
+                <th>Submission time</th>
+                <th>View number</th>
+                <th>Vote number</th>
+                <th>Title</th>
+                <th>Message</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for question in question %}
+                    <td id=text>
+                        {{ question }}
+                    </td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+    <h4 id="textlabel">Comments to question</h4>
+    <a href="/question/{{ question_id }}/new-comment"><button type="button">Add comment</button></a>
+        {% for comment in comments %}
+            {% if comment.question_id == question_id|int %}
+                <p>
+                    {{ comment.submission_time }} {{ comment.message }}
+                </p>
+            {% endif %}
         {% endfor %}
-
-    </tr>
-    </tbody>
-
-</table>
-<h4 id="textlabel">Comments to question</h4>
-<a href="/question/{{ question_id }}/new-comment"><button type="button">Add comment</button></a>
-    {% for comment in comments %}
-    {% if comment.question_id == question_id|int %}
-    <p>{{ comment.submission_time }} {{ comment.message }}</p>
-    {% endif %}
-    {% endfor %}
-<h4 id="textlabel">List of all answers</h4>
-<p><a href="/question/{{ question_id }}/new-answer"><button type="button">Add new answer</button></a></p>
-<table>
+    <h4 id="textlabel">List of all answers</h4>
+    <p><a href="/question/{{ question_id }}/new-answer"><button type="button">Add new answer</button></a></p>
+    <table>
         <tr id="textlabel">
             <th>Submission Time</th>
             <th>Message</th>
         </tr>
         {% for answer in answers %}
             {% if answer.get('question_id') == question_id|int %}
-        <tr id="text">
-            <td>
-                {{ answer.submission_time }}
-            </td>
-            <td>
-                {{ answer.message }}
-                <a href="/answer/{{ answer.id }}/edit"> <button type="button">Edit answer</button></a>
-                <a href="/answer/{{ answer.id }}/new-comment"><button type="button">Add comment</button></a><br>
+                <tr id="text">
+                    <td>
+                        {{ answer.submission_time }}
+                    </td>
+                    <td>
+                        {{ answer.message }}
+                        <a href="/answer/{{ answer.id }}/edit"> <button type="button">Edit answer</button></a>
+                        <a href="/answer/{{ answer.id }}/new-comment"><button type="button">Add comment</button></a><br>
+                    </td>
+                </tr>
                     {% for comment in comments %}
-                    {% if comment.answer_id == answer.id %}
-                 {{ comment.submission_time }} {{ comment.message }}
-            </td>
-        </tr>
-                    {% endif %}
+                        {% if comment.answer_id == answer.id %}
+                            <tr>
+                                <td id="text" style="padding-left: 70px">
+                                    {{ comment.submission_time }}
+                                </td>
+                                <td id="text" style="padding-left: 50px">
+                                    {{ comment.message }}<br>
+                                </td>
+                            </tr>
+                        {% endif %}
                     {% endfor %}
-        {% endif %}
+            {% endif %}
         {% endfor %}
-    </table>
-<p><a href="/list"><button type="button">Back to main page</button></a></p>
+        </table>
+    <p><a href="/list"><button type="button">Back to main page</button></a></p>
 </body>
 {% endblock %}
