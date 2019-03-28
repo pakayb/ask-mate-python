@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+<body>
+    <form action="/question/{{ question_id }}/new-comment" method="post">
+        <p>
+            <label>New comment:</label><br>
+            <textarea name="message" rows="8" cols="80" minlength="10" required></textarea><br>
+            <button type="submit">Save comment</button>
+        </p>
+    </form>
+
+</body>
+{% endblock %}

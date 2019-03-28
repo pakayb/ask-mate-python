@@ -1,10 +1,4 @@
-import connection
 import database_common
-
-ANSWER_FILE_PATH = 'answer.csv'
-QUESTION_FILE_PATH = 'question.csv'
-ANSWER_HEADER = ['id', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
-QUESTION_HEADER = ['id', 'submission_time', 'view_number', 'vote_number', 'title', 'message', 'image']
 
 
 @database_common.connection_handler
@@ -39,7 +33,6 @@ def get_max_id(cursor):
 
 @database_common.connection_handler
 def save_new_answer(cursor, data):
-    # connection.append_item_to_csv(ANSWER_FILE_PATH, ANSWER_HEADER, value)
     cursor.execute("""
                     INSERT INTO answer (submission_time, vote_number, question_id, message)  
                     VALUES (%s, %s, %s, %s)
@@ -55,7 +48,6 @@ def update_view_number(cursor,number):
 
 @database_common.connection_handler
 def get_all_answers(cursor):
-    # return connection.read_csv(ANSWER_FILE_PATH, ANSWER_HEADER)
     cursor.execute("""
                         SELECT * FROM answer
                         ORDER BY submission_time DESC
@@ -82,16 +74,20 @@ def update_answer(cursor, answer, answer_id):
     """,
                    {'answer': answer, 'answer_id': answer_id})
 
-# @database_common.connection_handler
-# def get_question_headers(cursor):
-#     cursor.execute("""
-#                     SELECT * FROM information_schema.columns
-#                     WHERE TABLE_NAME =N'question'
-#     """)
-#     question_header = cursor.fetchall()
-#     return question_header
-#
-#
-# def get_answer_headers():
-#     answer_header = [header.title().replace("_", " ") for header in ANSWER_HEADER]
-#     return answer_header
+
+@database_common.connection_handler
+def add_comment(cursor, data):
+    cursor.execute("""
+                    INSERT INTO comment (question_id, answer_id, message, submission_time, edited_count)
+                    VALUES (%s, %s, %s, %s, %s)
+    """, (data.get('question_id'), data.get('answer_id'), data.get('message'),
+          data.get('submission_time'), data.get('edited_count')))
+
+
+@database_common.connection_handler
+def get_all_comments(cursor):
+    cursor.execute("""
+                      SELECT * FROM comment
+                      ORDER BY submission_time DESC
+                    """)
+    return cursor.fetchall()

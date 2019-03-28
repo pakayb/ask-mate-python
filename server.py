@@ -77,7 +77,6 @@ def update_answer(answer_id):
         return redirect(url_for('question_details', question_id=question_id))
 
 
-
 @app.route('/search')
 def searching():
     search_key = '%'+request.args.get('search_key')+'%'
@@ -85,5 +84,22 @@ def searching():
     return render_template('index.html', questions=questions, header='Search result')
 
 
+@app.route('/question/<answer_id>/new-comment', methods=['GET', 'POST'])
+@app.route('/question/<question_id>/new-comment', methods=['GET', 'POST'])
+def add_comment(answer_id=None, question_id=None):
+    if request.method == 'POST':
+        new_comment_data = {
+            "question_id": question_id,
+            "answer_id": answer_id,
+            "message": request.form.get('message'),
+            "submission_time": util.create_timestamp(),
+            "edited_count": 0
+        }
+        data_manager.add_comment(new_comment_data)
+        return render_template('kacsa.html', comments=data_manager.get_all_comments())
+    elif request.method == 'GET':
+        return render_template('add_comment.html', question_id=question_id, header='ASD')
+
+
 if __name__ == '__main__':
-    app.run(debug=True,port=8000)
+    app.run(debug=True, port=8000)
