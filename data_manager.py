@@ -96,8 +96,12 @@ def get_all_comments(cursor):
 @database_common.connection_handler
 def get_question_by_id(cursor, question_id):
     cursor.execute("""
+                    UPDATE question
+                    SET view_number = view_number + 1
+                    WHERE id = %(question_id)s;
                     SELECT * FROM question
                     WHERE id = %(question_id)s
-                    ORDER BY submission_time DESC
+                    ORDER BY submission_time DESC;
+                    
     """, {'question_id': question_id})
     return cursor.fetchall()
