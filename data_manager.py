@@ -103,3 +103,13 @@ def get_question_by_id(cursor, question_id):
                     
     """, {'question_id': question_id})
     return cursor.fetchone()
+
+
+@database_common.connection_handler
+def get_answer_by_id(cursor, answer_id):
+    cursor.execute("""
+                    SELECT * FROM answer
+                    WHERE id = %(answer_id)s
+                    ORDER BY submission_time DESC;
+    """, {'answer_id': answer_id})
+    return cursor.fetchone()
