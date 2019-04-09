@@ -1,15 +1,20 @@
 {% extends "layout.html" %}
 {% block content %}
-<body>
-    <h1 class="kacsa">Ask Mate 2.0</h1>
-    <form action="/answer/{{ answer_id }}/new-comment" method="post">
-        <p id="textlabel">
-            <label>New comment:</label><br>
-            <input type="hidden" value="{{ redirect_id }}" name="redirect_id">
-            <textarea name="message" rows="8" cols="80" minlength="10" required></textarea><br>
-            <button type="submit">Save comment</button>
-        </p>
-    </form>
-
-</body>
+    <body>
+    <table id="adding">
+        <tr>
+            <td>
+                <h1 class="kacsa">Ask Mate 2.0</h1>
+                <form action="/answer/{{ answer_id }}/new-comment" method="post">
+                    <p id="textlabel">
+                        <label>New comment:</label><br>
+                        <input type="hidden" value="{{ redirect_id }}" name="redirect_id">
+                        <textarea name="message" rows="8" cols="80" minlength="10" required></textarea><br>
+                        <button type="submit">Save comment</button>
+                    </p>
+                </form>
+            </td>
+        </tr>
+    </table>
+    </body>
 {% endblock %}

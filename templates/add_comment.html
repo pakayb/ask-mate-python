@@ -1,14 +1,21 @@
 {% extends "layout.html" %}
 {% block content %}
-<body>
-    <h1 class="kacsa">Ask Mate 2.0</h1>
-    <form action="/question/{{ question_id }}/new-comment" method="post">
-        <p id="textlabel">
-            <label>New comment:</label><br>
-            <textarea name="message" rows="8" cols="80" minlength="10" required></textarea><br>
-            <button type="submit">Save comment</button>
-        </p>
+    <body>
+    <table id="adding">
+        <tr>
+            <td>
+                <h1 class="kacsa">Ask Mate 2.0</h1>
+                <form action="/question/{{ question_id }}/new-comment" method="post">
+                    <p id="textlabel">
+                        <label>New comment:</label><br>
+                        <textarea name="message" rows="8" cols="80" minlength="10" required></textarea><br>
+                        <button type="submit">Save comment</button>
+                    </p>
+                </form>
+            </td>
+        </tr>
+    </table>
     </form>
 
-</body>
+    </body>
 {% endblock %}

@@ -1,6 +1,78 @@
 body{
-    background-image:url("ask_bg_2.jpg");
+    font-family: 'Roboto', sans-serif;
+    background-image:url("2qxJY7.png");
+    background-attachment: fixed;
+    padding-bottom: 20px;
 }
+table{
+    border-spacing: 15px;
+    background-image:url("ask_bg_2.jpg");
+    box-shadow: 20px 20px 20px rgba(0, 0, 0, .9);
+    border-width: 3px;
+    border-style: outset;
+    border-color: #00CFFB;
+}
+table#table {
+
+    border-color: #00CFFB;
+    padding: 15px;
+    margin: auto;
+    width: 84%;
+    height: 84%;
+}
+table#adding {
+    border-color: #00CDFB;
+    border-width: 3px;
+    padding: 15px;
+    margin: auto;
+    width: 40%;
+    height: 40%;
+    text-align: center;
+}
+th#center {
+    text-align: center;
+}
+
+button{
+  background: #0075A3;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:30px;
+  font-size:12px;
+  padding:0 5px;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color: #0075A3;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #0075A3;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:30px;
+  transition:800ms ease all;
+}
+button#right {
+    text-align: right;
+}
+
 
 h1{
     color: cornsilk;
@@ -8,7 +80,6 @@ h1{
     font-style: italic;
     text-decoration: none;
 }
-
 .kacsa{
     color: cornsilk;
     font-size: 3em;
@@ -50,7 +121,14 @@ h1{
 }
 
 #text{
-    text-align:center;
     color: cornsilk;
     text-align: left;
+}
+#text2{
+    text-align: right;
+    color: cornsilk;
+}
+#text3{
+    text-align: center;
+    color: cornsilk;
 }

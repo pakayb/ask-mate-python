@@ -1,13 +1,23 @@
 {% extends "layout.html" %}
 {% block content %}
-<body>
-    <h1 class="kacsa">Ask Mate 2.0</h1>
-    <form action="/add-question" method="post">
-        <p id="textlabel"><label for="add-question">Question title:<br></label>
-            <input type="text" name="title" required></p>
-        <p id="textlabel"><label for="add-question">Question message:<br></label>
-            <textarea id="add-question" name="message" rows="7" cols="40" required></textarea></p>
-        <p><button type="submit">Add question</button></p>
-    </form>
-</body>
+    <body>
+    <table id="adding">
+        <tr>
+            <td>
+                <h1 class="kacsa">Ask Mate 2.0</h1>
+                <form action="/add-question" method="post">
+                    <p id="textlabel"><label for="add-question" class="center">Question title:<br></label>
+                        <input type="text" name="title" required>
+                    </p>
+                    <p id="textlabel"><label for="add-question" class="center">Question message:<br></label>
+                        <textarea id="add-question" name="message" rows="7" cols="40" required></textarea>
+                    </p>
+                    <p>
+                        <button type="submit" class="center">Add question</button>
+                    </p>
+                </form>
+            </td>
+        </tr>
+    </table>
+    </body>
 {% endblock %}
