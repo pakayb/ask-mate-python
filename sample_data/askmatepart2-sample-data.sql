@@ -95,7 +95,7 @@ ALTER TABLE ONLY comment
     ADD CONSTRAINT fk_answer_id FOREIGN KEY (answer_id) REFERENCES answer(id);
 
 ALTER TABLE ONLY question
-    ADD CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users(id);
+    ADD CONSTRAINT fk_question_user_id FOREIGN KEY (user_id) REFERENCES users(id);
 
 ALTER TABLE ONLY answer
     ADD CONSTRAINT fk_answer_user_id FOREIGN KEY (user_id) REFERENCES users(id);
