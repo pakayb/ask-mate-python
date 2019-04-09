@@ -72,7 +72,7 @@ CREATE TABLE users(
     id        serial NOT NULL PRIMARY KEY ,
     user_name character varying(255) NOT NULL,
     password    character varying(255) NOT NULL,
-    email     character varying(255) NOT NULL
+    registration_time timestamp without time zone
 );
 
 
