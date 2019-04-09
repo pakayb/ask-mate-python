@@ -40,10 +40,11 @@ def save_new_answer(cursor, data):
 
 
 @database_common.connection_handler
-def update_view_number(cursor,number):
+def update_view_number(cursor,number,question_id):
     cursor.execute("""
-                    UPDATE question SET view_number = %(views)s
-    """,{'views':number})
+                    UPDATE question SET view_number = %(number)s
+                    WHERE id = %(question_id)s
+    """,{'number':number + 1,'question_id':question_id})
 
 
 @database_common.connection_handler
@@ -96,12 +97,9 @@ def get_all_comments(cursor):
 @database_common.connection_handler
 def get_question_by_id(cursor, question_id):
     cursor.execute("""
-                    UPDATE question
-                    SET view_number = view_number + 1
-                    WHERE id = %(question_id)s;
                     SELECT * FROM question
                     WHERE id = %(question_id)s
                     ORDER BY submission_time DESC;
                     
     """, {'question_id': question_id})
-    return cursor.fetchall()
+    return cursor.fetchone()
