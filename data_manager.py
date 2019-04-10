@@ -34,9 +34,9 @@ def get_max_id(cursor):
 @database_common.connection_handler
 def save_new_answer(cursor, data):
     cursor.execute("""
-                    INSERT INTO answer (submission_time, vote_number, question_id, message)  
-                    VALUES (%s, %s, %s, %s)
-    """, (data.get('submission_time'), data.get('vote_number'), data.get('question_id'), data.get('message')))
+                    INSERT INTO answer (submission_time, vote_number, question_id, message, user_id)  
+                    VALUES (%s, %s, %s, %s, %s)
+    """, (data.get('submission_time'), data.get('vote_number'), data.get('question_id'), data.get('message'), data.get('user_id')))
 
 
 @database_common.connection_handler

@@ -38,14 +38,6 @@ def create_new_question_data():
     return new_question_data
 
 
-def get_user_id():
-    try:
-        user = data_manager.get_id_by_user_name(session['username'])
-        return user['id']
-    except KeyError:
-        return None
-
-
 @app.route('/question/<question_id>')
 def question_details(question_id):
     question = data_manager.get_question_by_id(question_id)
@@ -73,7 +65,8 @@ def create_new_answer_data(question_id):
         "vote_number": "0",
         "question_id": question_id,
         "message": request.form.get('message'),
-        "image": "n/a"
+        "image": "n/a",
+        "user_id": get_user_id()
     }
     return new_answer_data
 
@@ -183,6 +176,14 @@ def hash_password(plain_text_password):
 def list_all_users():
     users = data_manager.list_all_user()
     return render_template('all_users.html', users=users)
+
+
+def get_user_id():
+    try:
+        user = data_manager.get_id_by_user_name(session['username'])
+        return user['id']
+    except KeyError:
+        return None
 
 
 if __name__ == '__main__':
