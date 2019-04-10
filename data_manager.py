@@ -131,3 +131,12 @@ def add_new_user(cursor, user_data):
                     INSERT INTO users(user_name, password, registration_time)
                     VALUES (%s, %s, %s)
                     """, (user_data.get('user_name'), user_data.get('password'), user_data.get('registration_time')))
+
+
+@database_common.connection_handler
+def list_all_user(cursor):
+    cursor.execute("""
+                    SELECT user_name, registration_time FROM users
+                    ORDER BY registration_time DESC
+                    """)
+    return cursor.fetchall()

@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+    <body>
+    <table id="adding">
+        <tr>
+            <td id="text3">
+                <h1 class="kacsa">Ask Mate 2.0</h1>
+                {% for user in users %}
+                    <p>{{ user.user_name }} {{ user.registration_time }}</p>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p><a href="/list">
+                    <button type="button">Back to main page</button>
+                </a></p>
+            </td>
+        </tr>
+    </table>
+    </body>
+{% endblock %}

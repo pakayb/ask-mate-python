@@ -9,7 +9,6 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 @app.route('/list')
 def all_questions(limit=None):
     questions = data_manager.get_all_questions(limit)
-    print(questions)
     return render_template('index.html', questions=questions, header='List of all questions')
 
 
@@ -170,6 +169,12 @@ def save_new_user():
 def hash_password(plain_text_password):
     hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
     return hashed_bytes.decode('utf-8')
+
+
+@app.route('/list_users')
+def list_all_users():
+    users = data_manager.list_all_user()
+    return render_template('all_users.html', users=users)
 
 
 if __name__ == '__main__':
