@@ -79,10 +79,10 @@ def update_answer(cursor, answer, answer_id):
 @database_common.connection_handler
 def add_comment(cursor, data):
     cursor.execute("""
-                    INSERT INTO comment (question_id, answer_id, message, submission_time, edited_count)
-                    VALUES (%s, %s, %s, %s, %s)
+                    INSERT INTO comment (question_id, answer_id, message, submission_time, edited_count, user_id)
+                    VALUES (%s, %s, %s, %s, %s, %s)
     """, (data.get('question_id'), data.get('answer_id'), data.get('message'),
-          data.get('submission_time'), data.get('edited_count')))
+          data.get('submission_time'), data.get('edited_count'), data.get('user_id')))
 
 
 @database_common.connection_handler

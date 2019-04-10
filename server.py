@@ -104,7 +104,8 @@ def create_new_comment_data(answer_id, question_id):
         "answer_id": answer_id,
         "message": request.form.get('message'),
         "submission_time": util.create_timestamp(),
-        "edited_count": 0
+        "edited_count": 0,
+        "user_id": get_user_id()
     }
     return new_comment_data
 
