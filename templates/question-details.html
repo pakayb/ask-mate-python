@@ -1,72 +1,104 @@
 {% extends "layout.html" %}
 {% block content %}
-<body>
+    <body>
     <h1>Ask Mate 2.0</h1>
-    <table style="table-layout: auto; width: 100%">
+    <table id="table">
         <thead>
-            <tr id="textlabel">
-                <th>Id</th>
-                <th>Submission time</th>
-                <th>View number</th>
-                <th>Vote number</th>
-                <th>Title</th>
-                <th>Message</th>
-                <th>Image</th>
-            </tr>
+        <tr id="textlabel">
+            <th>Id</th>
+            <th>Submission time</th>
+            <th>View number</th>
+            <th>Vote number</th>
+            <th>Title</th>
+            <th>Message</th>
+            <th>Image</th>
+        </tr>
         </thead>
         <tbody>
-            <tr>
-                {% for question in question %}
-                    <td id=text>
-                        {{ question }}
-                    </td>
-                {% endfor %}
-            </tr>
-        </tbody>
-    </table>
-    <h4 id="textlabel">Comments to question</h4>
-    <a href="/question/{{ question_id }}/new-comment"><button type="button">Add comment</button></a>
-        {% for comment in comments %}
-            {% if comment.question_id == question_id|int %}
-                <p id="text">
-                    {{ comment.submission_time }} {{ comment.message }}
-                </p>
-            {% endif %}
-        {% endfor %}
-    <h4 id="textlabel">List of all answers</h4>
-    <p><a href="/question/{{ question_id }}/new-answer"><button type="button">Add new answer</button></a></p>
-    <table>
+        <tr>
+                <td id=text colspan="2">
+                    {{ question.submisiion_time }}
+                </td>
+                <td id=text colspan="3">
+                    {{ question.message }}
+                </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td colspan="2">
+                <p><a href="/question/{{ question_id }}/new-answer">
+                <button type="button">Add new answer</button></a></p>
+            </td>
+            <td colspan="2" align="center">
+                <h4 id="textlabel">List of all answers</h4>
+            </td>
+        </tr>
+
         <tr id="textlabel">
-            <th>Submission Time</th>
-            <th>Message</th>
+            <th colspan="2" id="center">Submission Time</th>
+            <th colspan="3" id="center">Message</th>
         </tr>
         {% for answer in answers %}
             {% if answer.get('question_id') == question_id|int %}
                 <tr id="text">
-                    <td>
+                    <td colspan="2" align="center">
                         {{ answer.submission_time }}
                     </td>
-                    <td>
+                    <td colspan="4" class="line">
                         {{ answer.message }}
-                        <a href="/answer/{{ answer.id }}/edit"> <button type="button">Edit answer</button></a>
-                        <a href="/answer/{{ answer.id }}/new-comment"><button type="button">Add comment</button></a><br>
+                    </td>
+                    <td colspan="2" align="center">
+                        <a href="/answer/{{ answer.id }}/edit">
+                            <button type="button">Edit</button>
+                        </a>
+                        <a href="/answer/{{ answer.id }}/new-comment">
+                            <button type="button">Comment</button>
+                        </a><br>
                     </td>
                 </tr>
-                    {% for comment in comments %}
-                        {% if comment.answer_id == answer.id %}
-                            <tr>
-                                <td id="text" style="padding-left: 70px">
-                                    {{ comment.submission_time }}
-                                </td>
-                                <td id="text" style="padding-left: 50px">
-                                    {{ comment.message }}<br>
-                                </td>
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
+                {% for comment in comments %}
+                    {% if comment.answer_id == answer.id %}
+                        <tr>
+                            <td colspan="2" id="text3">
+                                {{ comment.submission_time }}
+                            </td>
+                            <td id="text2">
+                                <i class="fa fa-commenting-o" style="font-size:24px"> </i>
+                            </td>
+                            <td colspan="3" id="text" class="line">
+                                {{ comment.message }}<br>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
             {% endif %}
         {% endfor %}
-        </table>
-    <p><a href="/list"><button type="button">Back to main page</button></a></p>
-</body>
+        <tr>
+            <td colspan="7">
+                <h4 id="textlabel">Comments to question</h4>
+                <a href="/question/{{ question_id }}/new-comment">
+                    <button type="button">Add comment</button>
+                </a>
+                {% for comment in comments %}
+                    {% if comment.question_id == question_id|int %}
+                        <p id="text">
+                            {{ comment.submission_time }} {{ comment.message }}
+                        </p>
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="7">
+                <p><a href="/list">
+                    <button type="button">Back to main page</button>
+                </a></p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </body>
 {% endblock %}
+
+
+

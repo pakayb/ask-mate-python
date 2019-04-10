@@ -9,6 +9,7 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 @app.route('/list')
 def all_questions(limit=None):
     questions = data_manager.get_all_questions(limit)
+    print(questions)
     return render_template('index.html', questions=questions, header='List of all questions')
 
 
