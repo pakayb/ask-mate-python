@@ -91,3 +91,13 @@ def get_all_comments(cursor):
                       ORDER BY submission_time DESC
                     """)
     return cursor.fetchall()
+
+
+@database_common.connection_handler
+def get_password_by_username(cursor, user_name):
+    cursor.execute("""
+                    SELECT password FROM users
+                    WHERE user_name LIKE %(user_name)s  
+                    """,
+                   {'user_name': user_name})
+    return cursor.fetchone()

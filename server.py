@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session, escape
 import data_manager, util
+import bcrypt
 
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 
 @app.route('/list')
@@ -120,6 +122,38 @@ def add_comment_to_question(answer_id=None, question_id=None):
         return redirect(url_for('question_details', question_id=question_id))
     elif request.method == 'GET':
         return render_template('add_comment.html', question_id=question_id)
+
+
+@app.route('/login/user')
+def index():
+    if 'username' in session:
+        return 'Logged in as %s' % escape(session['username'])
+    return 'You are not logged in'
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        session['username'] = request.form['username']
+        plain_text_password = request.form['password']
+        passwd = data_manager.get_password_by_username(session['username']).get('password')
+        print(verify_password(plain_text_password,passwd))
+        if verify_password(plain_text_password,passwd ):
+            return redirect('/login/user')
+        else:
+            return redirect(url_for('login'))
+    return render_template('registration.html')
+
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('index'))
+
+
+def verify_password(plain_text_password, hashed_password):
+    hashed_bytes_password = hashed_password.encode('utf-8')
+    return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
 
 
 if __name__ == '__main__':
