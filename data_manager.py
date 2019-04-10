@@ -113,3 +113,11 @@ def get_answer_by_id(cursor, answer_id):
                     ORDER BY submission_time DESC;
     """, {'answer_id': answer_id})
     return cursor.fetchone()
+
+
+@database_common.connection_handler
+def add_new_user(cursor, user_data):
+    cursor.execute("""
+                    INSERT INTO users(user_name, password, registration_time)
+                    VALUES (%s, %s, %s)
+                    """, (user_data.get('user_name'), user_data.get('password'), user_data.get('registration_time')))

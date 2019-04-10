@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import data_manager, util
-
+import bcrypt
 app = Flask(__name__)
 
 
@@ -112,6 +112,29 @@ def add_comment_to_question(answer_id=None, question_id=None):
         return redirect(url_for('question_details', question_id=question_id))
     elif request.method == 'GET':
         return render_template('add_comment.html', question_id=question_id)
+
+
+def create_user_data():
+    passwd = hash_password(request.form.get('password'))
+    user_data = {
+        'user_name': request.form.get('username'),
+        'password': passwd,
+        'registration_time': util.create_timestamp()
+    }
+    return user_data
+
+
+@app.route('/registration', methods=['GET', 'POST'])
+def save_new_user():
+    if request.method == 'POST':
+        data_manager.add_new_user(create_user_data())
+        return redirect('/')
+    return render_template('registration.html')
+
+
+def hash_password(plain_text_password):
+    hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
+    return hashed_bytes.decode('utf-8')
 
 
 if __name__ == '__main__':
