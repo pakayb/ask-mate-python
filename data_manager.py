@@ -95,6 +95,16 @@ def get_all_comments(cursor):
 
 
 @database_common.connection_handler
+def get_password_by_username(cursor, user_name):
+    cursor.execute("""
+                    SELECT password FROM users
+                    WHERE user_name LIKE %(user_name)s  
+                    """,
+                   {'user_name': user_name})
+    return cursor.fetchone()
+
+
+@database_common.connection_handler
 def get_question_by_id(cursor, question_id):
     cursor.execute("""
                     SELECT * FROM question
