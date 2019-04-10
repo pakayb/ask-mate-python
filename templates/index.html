@@ -1,26 +1,39 @@
 {% extends "layout.html" %}
 {% block content %}
-<body>
-    <div id="searchbar">
-        <form action="/search" method="get">
-            <input type="text" placeholder="Search.." name="search_key">
-            <input type="submit" value="Let's search!">
-        </form>
-    </div>
-    <h1 class="kacsa">Ask Mate 2.0</h1>
-    <table id="kacsa">
+    <body>
+    <table id="table">
+        <div id="searchbar">
+            <form action="/search" method="get">
+                <input type="text" placeholder="Search.." name="search_key">
+                <input type="submit" value="Let's search!">
+            </form>
+        </div>
+        <h1>Ask Mate 2.0</h1>
         <tr>
-            <th>{{header}}</th>
+            <th id="text3">{{ header }}</th>
         </tr>
         <tr>
-        <td>{% for question in questions %}
-            <p><a href="/question/{{question.id}}" id="list">{{ question.title }}<a></a></p>
+            <td>{% for question in questions %}
+                <p><a href="/question/{{ question.id }}" id="list">{{ question.title }}<a></a></p>
             {% endfor %}</td>
         </tr>
+        <tr>
+            <td>
+                <p><a href="{{ url_for('all_questions') }}">
+                    <button type="button" class="butt">Show all questions</button>
+                </a></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p><a href="/add-question">
+                    <button type="button" class="butt">Add new question</button>
+                </a></p>
+            </td>
+        </tr>
     </table>
-    <p><a href="{{ url_for('all_questions') }}"><button type="button" class="butt">Show all questions</button></a> </p>
-    <p><a href="/add-question"><button type="button" class="butt">Add new question</button></a></p>
-</body>
+    </table>
+    </body>
 {% endblock %}
 
 
