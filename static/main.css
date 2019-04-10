@@ -2,7 +2,22 @@ body{
     font-family: 'Roboto', sans-serif;
     background-image:url("2qxJY7.png");
     background-attachment: fixed;
-    padding-bottom: 20px;
+}
+.line {
+    border-bottom: 2px;
+    border-color: #00CFFB;
+}
+input#sized {
+    width: 300px;
+    height:33px;
+    position:relative;
+}
+.brush {
+    background-image:url("brush.png");
+    background-size: 28%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    padding: 30px;
 }
 table{
     border-spacing: 15px;
@@ -38,9 +53,9 @@ button{
   color:#fff;
   border:none;
   position:relative;
-  height:30px;
-  font-size:12px;
-  padding:0 5px;
+  height:40px;
+  font-size:16px;
+  padding:0 25px;
   cursor:pointer;
   transition:800ms ease all;
   outline:none;
@@ -129,4 +144,9 @@ h1{
 #text3{
     text-align: center;
     color: cornsilk;
+}
+#text4{
+    text-align: center;
+    color: cornsilk;
+    font-size: 24px;
 }
