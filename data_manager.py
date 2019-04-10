@@ -101,3 +101,12 @@ def get_password_by_username(cursor, user_name):
                     """,
                    {'user_name': user_name})
     return cursor.fetchone()
+
+  
+@database_common.connection_handler
+def add_new_user(cursor, user_data):
+    cursor.execute("""
+                    INSERT INTO users(user_name, password, registration_time)
+                    VALUES (%s, %s, %s)
+                    """, (user_data.get('user_name'), user_data.get('password'), user_data.get('registration_time')))
+
