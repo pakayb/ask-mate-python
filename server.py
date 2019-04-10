@@ -33,8 +33,17 @@ def create_new_question_data():
         "vote_number": "0",
         "title": request.form.get('title'),
         "message": request.form.get('message'),
+        "user_id": get_user_id()
     }
     return new_question_data
+
+
+def get_user_id():
+    try:
+        user = data_manager.get_id_by_user_name(session['username'])
+        return user['id']
+    except KeyError:
+        return None
 
 
 @app.route('/question/<question_id>')
@@ -129,7 +138,6 @@ def login():
         session['username'] = request.form['username']
         plain_text_password = request.form['password']
         passwd = data_manager.get_password_by_username(session['username']).get('password')
-        print(verify_password(plain_text_password,passwd))
         if verify_password(plain_text_password,passwd ):
             return redirect('/login/user')
         else:
