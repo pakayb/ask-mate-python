@@ -15,9 +15,9 @@ def get_all_questions(cursor,limit=None):
 @database_common.connection_handler
 def save_new_question(cursor,data):
     cursor.execute("""
-                    INSERT INTO question (submission_time, view_number, vote_number, title, message)  
-                    VALUES (%s, %s, %s, %s, %s)
-    """, (data.get('submission_time'), data.get('view_number'), data.get('vote_number'), data.get('title'), data.get('message')))
+                    INSERT INTO question (submission_time, view_number, vote_number, title, message, user_id)  
+                    VALUES (%s, %s, %s, %s, %s, %s)
+    """, (data.get('submission_time'), data.get('view_number'), data.get('vote_number'), data.get('title'), data.get('message'), data.get('user_id')))
 
 
 @database_common.connection_handler
@@ -34,9 +34,9 @@ def get_max_id(cursor):
 @database_common.connection_handler
 def save_new_answer(cursor, data):
     cursor.execute("""
-                    INSERT INTO answer (submission_time, vote_number, question_id, message)  
-                    VALUES (%s, %s, %s, %s)
-    """, (data.get('submission_time'), data.get('vote_number'), data.get('question_id'), data.get('message')))
+                    INSERT INTO answer (submission_time, vote_number, question_id, message, user_id)  
+                    VALUES (%s, %s, %s, %s, %s)
+    """, (data.get('submission_time'), data.get('vote_number'), data.get('question_id'), data.get('message'), data.get('user_id')))
 
 
 @database_common.connection_handler
@@ -79,10 +79,10 @@ def update_answer(cursor, answer, answer_id):
 @database_common.connection_handler
 def add_comment(cursor, data):
     cursor.execute("""
-                    INSERT INTO comment (question_id, answer_id, message, submission_time, edited_count)
-                    VALUES (%s, %s, %s, %s, %s)
+                    INSERT INTO comment (question_id, answer_id, message, submission_time, edited_count, user_id)
+                    VALUES (%s, %s, %s, %s, %s, %s)
     """, (data.get('question_id'), data.get('answer_id'), data.get('message'),
-          data.get('submission_time'), data.get('edited_count')))
+          data.get('submission_time'), data.get('edited_count'), data.get('user_id')))
 
 
 @database_common.connection_handler
@@ -140,3 +140,12 @@ def list_all_user(cursor):
                     ORDER BY registration_time DESC
                     """)
     return cursor.fetchall()
+
+
+@database_common.connection_handler
+def get_id_by_user_name(cursor, user_name):
+    cursor.execute("""
+                    SELECT id FROM users
+                    WHERE user_name= %(user_name)s;
+    """, {'user_name': user_name})
+    return cursor.fetchone()

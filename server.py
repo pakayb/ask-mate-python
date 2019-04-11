@@ -33,6 +33,7 @@ def create_new_question_data():
         "vote_number": "0",
         "title": request.form.get('title'),
         "message": request.form.get('message'),
+        "user_id": get_user_id()
     }
     return new_question_data
 
@@ -64,7 +65,8 @@ def create_new_answer_data(question_id):
         "vote_number": "0",
         "question_id": question_id,
         "message": request.form.get('message'),
-        "image": "n/a"
+        "image": "n/a",
+        "user_id": get_user_id()
     }
     return new_answer_data
 
@@ -102,7 +104,8 @@ def create_new_comment_data(answer_id, question_id):
         "answer_id": answer_id,
         "message": request.form.get('message'),
         "submission_time": util.create_timestamp(),
-        "edited_count": 0
+        "edited_count": 0,
+        "user_id": get_user_id()
     }
     return new_comment_data
 
@@ -129,7 +132,6 @@ def login():
         session['username'] = request.form['username']
         plain_text_password = request.form['password']
         passwd = data_manager.get_password_by_username(session['username']).get('password')
-        print(verify_password(plain_text_password,passwd))
         if verify_password(plain_text_password,passwd ):
             return redirect('/login/user')
         else:
@@ -175,6 +177,14 @@ def hash_password(plain_text_password):
 def list_all_users():
     users = data_manager.list_all_user()
     return render_template('all_users.html', users=users)
+
+
+def get_user_id():
+    try:
+        user = data_manager.get_id_by_user_name(session['username'])
+        return user['id']
+    except KeyError:
+        return None
 
 
 if __name__ == '__main__':
