@@ -21,7 +21,7 @@ def latest_questions(limit=5):
 @app.route('/add-question', methods=['GET', 'POST'])
 def save_new_question():
     if request.method == 'POST':
-        data_manager.save_new_question(stion_data())
+        data_manager.save_new_question(create_new_question_data())
         return redirect(url_for('question_details', question_id=data_manager.get_max_id()))
     return render_template('add_question.html')
 
@@ -187,7 +187,7 @@ def get_user_id():
     try:
         user = data_manager.get_id_by_user_name(session['username'])
         return user['id']
-    except KeyError:
+    except (TypeError, KeyError):
         return None
 
 
