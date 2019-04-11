@@ -9,13 +9,13 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 @app.route('/list')
 def all_questions(limit=None):
     questions = data_manager.get_all_questions(limit)
-    return render_template('index.html', questions=questions, header='List of all questions')
+    return render_template('index.html', questions=questions, header='List of all questions', login=False)
 
 
 @app.route('/')
 def latest_questions(limit=5):
     questions = data_manager.get_all_questions(limit)
-    return render_template('index.html', questions=questions, header='Latest questions')
+    return render_template('index.html', questions=questions, header='Latest questions', login=False)
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
@@ -46,7 +46,8 @@ def question_details(question_id):
         'question-details.html', question=question,
         question_id=question_id,
         answers=data_manager.get_all_answers(),
-        comments=data_manager.get_all_comments()
+        comments=data_manager.get_all_comments(),
+        login=False
     )
 
 
@@ -129,14 +130,17 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        session['username'] = request.form['username']
-        plain_text_password = request.form['password']
-        passwd = data_manager.get_password_by_username(session['username']).get('password')
-        if verify_password(plain_text_password,passwd ):
-            return redirect('/login/user')
-        else:
-            return redirect(url_for('login'))
-    return render_template('registration.html')
+            session['username'] = request.form['username']
+            plain_text_password = request.form['password']
+            try:
+                passwd = data_manager.get_password_by_username(session['username']).get('password')
+            except AttributeError:
+                return render_template('registration.html', alert=True)
+            if verify_password(plain_text_password, passwd):
+                return redirect(request.form['referrer'])
+            return render_template('registration.html', alert=True)
+    nexturl = request.referrer
+    return render_template('registration.html', nexturl=nexturl)
 
 
 @app.route('/logout')

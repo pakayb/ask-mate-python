@@ -7,11 +7,15 @@
         <tr>
             <td>
                 <h1 class="kacsa">Ask Mate 2.0</h1>
+                {% if alert == True %}
+                    <h2>Wrong username/password!</h2>
+                {% endif %}
                 <form method="post">
                     <p id="textlabel"><label for="add-user">User name:<br></label>
                         <input type="text" name="username" required></p>
                     <p id="textlabel"><label for="add-user">Password:<br></label>
-                        <input type="text" name="password" required></p>
+                        <input type="password" name="password" required></p>
+                        <input type="hidden" name="referrer" value={{ nexturl }}>
                     <p>
                         <button type="submit">Go for it!</button>
                     </p>

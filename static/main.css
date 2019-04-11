@@ -8,7 +8,7 @@ body{
     border-color: #00CFFB;
 }
 input#sized {
-    width: 300px;
+    width: 250px;
     height:33px;
     position:relative;
 }
