@@ -135,12 +135,12 @@ def login():
             try:
                 passwd = data_manager.get_password_by_username(session['username']).get('password')
             except AttributeError:
-                return render_template('registration.html', alert=True)
+                return render_template('registration.html', alert=True, reg_or_log='LOGIN', title='Login page')
             if verify_password(plain_text_password, passwd):
                 return redirect(request.form['referrer'])
-            return render_template('registration.html', alert=True)
+            return render_template('registration.html', alert=True, reg_or_log='LOGIN', title='Login page')
     nexturl = request.referrer
-    return render_template('registration.html', nexturl=nexturl)
+    return render_template('registration.html', nexturl=nexturl, reg_or_log='LOGIN', title='Login page')
 
 
 @app.route('/logout')
@@ -169,7 +169,7 @@ def save_new_user():
     if request.method == 'POST':
         data_manager.add_new_user(create_user_data())
         return redirect('/')
-    return render_template('registration.html')
+    return render_template('registration.html', reg_or_log='REGISTER', title='Create new account')
 
 
 def hash_password(plain_text_password):
