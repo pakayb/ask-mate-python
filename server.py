@@ -9,19 +9,19 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 @app.route('/list')
 def all_questions(limit=None):
     questions = data_manager.get_all_questions(limit)
-    return render_template('index.html', questions=questions, header='List of all questions', login=False)
+    return render_template('index.html', questions=questions, header='List of all questions', login=get_user_id())
 
 
 @app.route('/')
 def latest_questions(limit=5):
     questions = data_manager.get_all_questions(limit)
-    return render_template('index.html', questions=questions, header='Latest questions', login=False)
+    return render_template('index.html', questions=questions, header='Latest questions', login=get_user_id())
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
 def save_new_question():
     if request.method == 'POST':
-        data_manager.save_new_question(create_new_question_data())
+        data_manager.save_new_question(stion_data())
         return redirect(url_for('question_details', question_id=data_manager.get_max_id()))
     return render_template('add_question.html')
 
@@ -47,7 +47,7 @@ def question_details(question_id):
         question_id=question_id,
         answers=data_manager.get_all_answers(),
         comments=data_manager.get_all_comments(),
-        login=False
+        login=get_user_id()
     )
 
 
@@ -146,7 +146,7 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    return redirect(url_for('index'))
+    return redirect(url_for('latest_questions'))
 
 
 def verify_password(plain_text_password, hashed_password):
