@@ -8,7 +8,7 @@ body{
     border-color: #00CFFB;
 }
 input#sized {
-    width: 250px;
+    width: 240px;
     height:33px;
     position:relative;
 }
@@ -49,40 +49,42 @@ th#center {
 }
 
 button{
-  background: #0075A3;
-  color:#fff;
-  border:none;
-  position:relative;
-  height:40px;
-  font-size:16px;
-  padding:0 25px;
-  cursor:pointer;
-  transition:800ms ease all;
-  outline:none;
+    border-width: 3px;
+    border-style: outset;
+    border-color: #00CFFB;
+    background: #0075A3;
+    color:#fff;
+    position:relative;
+    height:40px;
+    font-size:16px;
+    padding:0 25px;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
 }
 button:hover{
-  background:#fff;
-  color: #0075A3;
+    background:#fff;
+    color: #0075A3;
 }
 button:before,button:after{
-  content:'';
-  position:absolute;
-  top:0;
-  right:0;
-  height:2px;
-  width:0;
-  background: #0075A3;
-  transition:400ms ease all;
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #0075A3;
+    transition:400ms ease all;
 }
 button:after{
-  right:inherit;
-  top:inherit;
-  left:0;
-  bottom:0;
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
 }
 button:hover:before,button:hover:after{
-  width:30px;
-  transition:800ms ease all;
+    width:30px;
+    transition:800ms ease all;
 }
 button#right {
     text-align: right;
@@ -103,11 +105,9 @@ h1{
 }
 
 #searchbar{
-    float: right;
-    padding: 0px;
-    border: none;
-    margin-top: 0px;
-    margin-right: 16px;
+    border-width: 3px;
+    border-style: outset;
+    border-color: #00CFFB;
     font-size: 17px;
 }
 

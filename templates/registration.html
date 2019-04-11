@@ -6,7 +6,8 @@
     <table id="adding">
         <tr>
             <td>
-                <h1 class="kacsa">Ask Mate 2.0</h1>
+                <h1 class="kacsa">~/Ask Mate 3.0/~</h1>
+                <h2 id="text3">{{ title }}</h2>
                 {% if alert == True %}
                     <h2 id="text3">Wrong username/password!</h2>
                 {% endif %}
@@ -17,7 +18,7 @@
                         <input type="password" name="password" required></p>
                         <input type="hidden" name="referrer" value={{ nexturl }}>
                     <p>
-                        <button type="submit">Go for it!</button>
+                        <button type="submit">{{ reg_or_log }}</button>
                     </p>
                 </form>
             </td>
