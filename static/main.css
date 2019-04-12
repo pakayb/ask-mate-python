@@ -1,4 +1,5 @@
 body{
+    padding-top: 100px;
     font-family: 'Roboto', sans-serif;
     background-image:url("2qxJY7.png");
     background-attachment: fixed;
@@ -8,9 +9,13 @@ body{
     border-color: #00CFFB;
 }
 input#sized {
-    width: 240px;
+    width: 300px;
     height:33px;
     position:relative;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, .9);
+    border-width: 3px;
+    border-style: outset;
+    border-color: #00CFFB;
 }
 .brush {
     background-image:url("brush.png");
@@ -44,11 +49,16 @@ table#adding {
     height: 40%;
     text-align: center;
 }
+h2, h3, h4 {
+    text-shadow: 1px 1px #0075A3;
+
+}
 th#center {
     text-align: center;
 }
 
 button{
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, .9);
     border-width: 3px;
     border-style: outset;
     border-color: #00CFFB;
@@ -90,6 +100,7 @@ button#right {
     text-align: right;
 }
 h1{
+    text-shadow: 3px 3px #0075A3;
     color: cornsilk;
     font-size: 3em;
     font-style: italic;
@@ -131,22 +142,40 @@ h1{
 #textlabel{
     color: cornsilk;
     font-weight: bolder;
+    text-shadow: 1px 1px #0075A3;
 }
 
 #text{
     color: cornsilk;
     text-align: left;
+    text-shadow: 1px 1px #0075A3;
 }
 #text2{
     text-align: right;
     color: cornsilk;
+    text-shadow: 1px 1px #0075A3;
 }
 #text3{
     text-align: center;
     color: cornsilk;
+    text-shadow: 1px 1px #0075A3;
 }
 #text4{
     text-align: center;
     color: cornsilk;
     font-size: 24px;
+    text-shadow: 1px 1px #0075A3;
+}
+input {
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, .9);
+    border-width: 3px;
+    border-style: outset;
+    border-color: #00CFFB;
+    height: 35px;
+}
+textarea {
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, .9);
+    border-width: 3px;
+    border-style: outset;
+    border-color: #00CFFB;
 }

@@ -3,7 +3,7 @@
     <body>
     <table id="table">
         <tr>
-            <td colspan="7">
+            <td colspan="7" style="padding-left: 60px">
                 <h1 align="left">~/{{ header }}/~</h1>
                 <a href="{{ url_for('all_questions') }}">
                     <button type="button">Show all questions</button>
@@ -11,19 +11,19 @@
             </td>
         </tr>
         <tr>
-            <td>{% for question in questions %}
-                <p><a href="/question/{{ question.id }}" id="list">{{ question.title }}</a></p>
+            <td id="text" style="padding-left: 90px">{% for question in questions %}
+                <p><a href="/question/{{ question.id }}" id="list"><i class="fa fa-question-circle-o" style="font-size:24px"></i>{{ question.title }}</a></p>
             {% endfor %}</td>
         </tr>
         <tr>
-            <td>
+            <td style="padding-left: 60px">
                 <a href="/add-question">
                     <button type="button">Add new question</button>
                 </a>
             </td>
         </tr>
     </table>
-    </table>
+    <h1 id="text">Sinaloa</h1>
     </body>
 {% endblock %}
 

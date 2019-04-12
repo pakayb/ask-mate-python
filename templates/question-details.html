@@ -5,34 +5,36 @@
         <thead>
         <tr id="textlabel">
             <td colspan="2" id="text3"><h4>Submission Time</h4></td>
-            <td colspan="5" id="text"><h1>~/QUESTION/~</h1></td>
+            <td colspan="2" id="text"><h1>~/QUESTION/~</h1></td>
         </tr>
         </thead>
         <tbody>
-            <tr>
-                <td id=text3 colspan="2" align="center">
-                    {{ question.submission_time }}
-                </td>
-                <td id=text colspan="3">
-                    {{ question.message }}
-                </td>
-                <td id="text3">
-                    <i class="fa fa-eye" style="font-size:28px"><p>{{ question.view_number }}</p></i>
-                </td>
-                <td id="text3">
-                    <i class="fa fa-thumbs-o-up" style="font-size:28px"><p>{{ question.vote_number }}</p></i>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td colspan="2">
-                    <p><a href="/question/{{ question_id }}/new-answer">
-                    <button type="button">New answer</button></a></p>
-                </td>
-                <td colspan="2" align="center">
-                    <h1 id="textlabel">~/List of all answers/~</h1>
-                </td>
-            </tr>
+        <tr>
+            <td id=text3 colspan="2" align="center">
+                {{ question.submission_time }}
+            </td>
+            <td id=text colspan="3">
+                <i class="fa fa-question-circle-o" style="font-size:18px"> </i>{{ question.title }}<br>
+                {{ question.message }}
+            </td>
+            <td id="text3">
+                <i class="fa fa-eye" style="font-size:28px"><p>{{ question.view_number }}</p></i>
+            </td>
+            <td id="text3">
+                <i class="fa fa-thumbs-o-up" style="font-size:28px"><p>{{ question.vote_number }}</p></i>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td colspan="2" align="center">
+                <p><a href="/question/{{ question_id }}/new-answer">
+                    <button type="button">Add answer</button>
+                </a></p>
+            </td>
+            <td colspan="2" align="center">
+                <h1>~/List of answers/~</h1>
+            </td>
+        </tr>
         {% for answer in answers %}
             {% if answer.get('question_id') == question_id|int %}
                 <tr id="text" style="width: 150px">
@@ -40,7 +42,7 @@
                         {{ answer.submission_time }}
                     </td>
                     <td colspan="3" class="line">
-                        {{ answer.message }}
+                        <i class="fa fa-comment" style="font-size:18px"> </i>{{ answer.message }}
                     </td>
                     <td align="center">
                         <a href="/answer/{{ answer.id }}/edit">
@@ -71,22 +73,38 @@
             {% endif %}
         {% endfor %}
         <tr>
-            <td colspan="7">
-                <h4 id="textlabel">Comments to question</h4>
-                <a href="/question/{{ question_id }}/new-comment">
-                    <button type="button">Add comment</button>
-                </a>
-                {% for comment in comments %}
-                    {% if comment.question_id == question_id|int %}
-                        <p id="text">
-                            {{ comment.submission_time }} {{ comment.message }}
-                        </p>
-                    {% endif %}
-                {% endfor %}
+            <td></td>
+            <td colspan="2" align="center">
+                <p><a href="/question/{{ question_id }}/new-comment">
+                    <button type="button"> Comment</button>
+                </a></p>
+            </td>
+            <td colspan="2" align="center">
+                <h1>~/List of comments/~</h1>
             </td>
         </tr>
+        {% for comment in comments %}
+            {% if comment.question_id == question_id|int %}
+                <tr>
+                    <td colspan="2">
+                        <p id="text3">
+                            {{ comment.submission_time }}
+                        </p>
+                    </td>
+                    <td id="text2">
+                        <i class="fa fa-question-circle-o" style="font-size:24px"></i>
+                        <i class="fa fa-commenting-o" style="font-size:24px"> </i>
+                    </td>
+                    <td colspan="4">
+                        <p id="text">
+                            {{ comment.message }}
+                        </p>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
         <tr>
-            <td colspan="7">
+            <td colspan="3" align="center">
                 <p><a href="/list">
                     <button type="button">Back to main page</button>
                 </a></p>
