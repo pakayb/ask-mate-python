@@ -17,13 +17,6 @@ input#sized {
     border-style: outset;
     border-color: #00CFFB;
 }
-.brush {
-    background-image:url("brush.png");
-    background-size: 28%;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    padding: 30px;
-}
 table{
     border-spacing: 15px;
     background-image:url("ask_bg_2.jpg");
