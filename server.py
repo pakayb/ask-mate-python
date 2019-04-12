@@ -146,7 +146,7 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('username', None)
-    return redirect(url_for('latest_questions'))
+    return redirect(request.referrer)
 
 
 def verify_password(plain_text_password, hashed_password):
@@ -169,7 +169,8 @@ def save_new_user():
     if request.method == 'POST':
         data_manager.add_new_user(create_user_data())
         return redirect('/')
-    return render_template('registration.html', reg_or_log='REGISTER', title='Create new account')
+    nexturl = request.referrer
+    return render_template('registration.html', reg_or_log='REGISTER', title='Create new account', nexturl=nexturl)
 
 
 def hash_password(plain_text_password):
@@ -180,7 +181,8 @@ def hash_password(plain_text_password):
 @app.route('/list_users')
 def list_all_users():
     users = data_manager.list_all_user()
-    return render_template('all_users.html', users=users)
+    nexturl = request.referrer
+    return render_template('all_users.html', users=users, nexturl=nexturl)
 
 
 def get_user_id():
